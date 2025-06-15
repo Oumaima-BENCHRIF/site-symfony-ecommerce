@@ -15,7 +15,7 @@ class Cart{
         // $session=$this->requestStack->getSession();
         $cart=$this->requestStack->getSession()->get('cart');
 
-    if( $cart[$product->getId()]){ 
+        if (isset($cart[$product->getId()])) { 
 
         $cart[$product->getId()]=[
             'object'=>$product,
@@ -33,6 +33,10 @@ class Cart{
 
     public function getCart(){
         return $this->requestStack->getSession()->get('cart');
+    }
+
+    public function remove(){
+        return $this->requestStack->getSession()->remove('cart');
     }
 
 }

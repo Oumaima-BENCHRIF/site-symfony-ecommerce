@@ -22,15 +22,26 @@ class CartController extends AbstractController
     public function add($id,Cart $cart,ProductRepository $productRepository): Response
     {
        $product=$productRepository->findOneBy(['id' => $id]);
+
        $cart->add($product);
 
-       $this->addFlash(
-        'success',
-        'Produit correctement ajouté à votre panier '
-        );
-        
+    //    $this->addFlash(
+    //     'success',
+    //     'Produit correctement ajouté à votre panier '
+    //     );
+
        return $this->redirectToRoute('app_product',[
         'slug'=>$product->getSlug()
        ]);
+    }
+
+    #[Route('/cart/remove', name: 'app_cart_remove')]
+    public function remove(Cart $cart): Response
+    {
+       
+       $cart->remove();
+       
+
+       return $this->redirectToRoute('app_home');
     }
 }
