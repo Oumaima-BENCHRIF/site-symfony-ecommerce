@@ -23,7 +23,9 @@
 
             <div class="col-md-2 text-right">
                
-                 <span class="badge text-bg-secondary"> x {{ product.qty}}</span>
+                <a href='{{path('app_cart_decrease',{id :product.object.id } ) }}'>-</a>  <span class="badge text-bg-secondary"> x {{ product.qty}}</span>
+                 <a href='{{path('app_cart_add',{id :product.object.id } ) }}'>+</a>
+
             </div>
 
             <div class="col md 2">
@@ -33,6 +35,8 @@
             </div>
       </div>
    {% endfor %}
+
+   <a href="{{path('app_cart_remove')}}" class='small d-block mt-3'>Vider le panier</a>
  
 </div>
 
