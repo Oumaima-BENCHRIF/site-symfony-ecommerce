@@ -4,7 +4,6 @@ namespace App\Twig;
 
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
-use Twig\TwigFunction;
 
 class AppExtension extends AbstractExtension
 {
@@ -15,11 +14,8 @@ class AppExtension extends AbstractExtension
         ];
     }
 
-    public function formatPrice(float $price, string $currency = '€', string $locale = 'fr_FR'): string
+    public function formatPrice($number): string
     {
-        return number_format($price, 2, ',', ' ') . ' ' . $currency;
-        
-        // Alternative plus sophistiquée (nécessite l'extension intl):
-        // return (new \NumberFormatter($locale, \NumberFormatter::CURRENCY))->formatCurrency($price, $currency);
+        return number_format($number / 100, 2, ',', ' ') . ' €';
     }
 }

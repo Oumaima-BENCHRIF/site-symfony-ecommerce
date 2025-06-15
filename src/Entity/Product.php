@@ -112,8 +112,8 @@ class Product
         return $this;
     }
     
-    public function getPraceWT(){
-        
+    public function getPriceWT(){
+
         $coff=1+($this->tva/100);
 
         return $coff*$this->price;
