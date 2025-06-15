@@ -54,6 +54,38 @@ class Cart{
             $this->requestStack->getSession()->set('cart',$cart);
     }
 
+    public function fullOuantity(){
+
+        $cart=$this->requestStack->getSession()->get('cart');
+        $quantity=0;
+
+        if(!isset($cart)){
+            return  $quantity;
+        }
+
+        foreach($cart as $product){
+            $quantity= $quantity+ $product['qty'];
+        }
+        return  $quantity;
+
+    }
+
+    public function getTotalWT(){
+
+        $cart=$this->requestStack->getSession()->get('cart');
+        $price=0;
+        
+        if(!isset($cart)){
+            return  $price;
+        }
+
+        foreach($cart as $product){
+            $price= $price+ ($product['object']->getPrice()* $product['qty'] );
+        }
+
+        return  $price;
+    }
+
 }
 
 
