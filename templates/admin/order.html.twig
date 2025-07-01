@@ -1,0 +1,16 @@
+{% extends '@EasyAdmin/crud/detail.html.twig' %}
+
+{% block content %}
+    <h1>Détail de la commande #{{ entity.id }}</h1>
+
+    <ul class="list-group mt-4">
+        <li class="list-group-item"><strong>Date :</strong> {{ entity.createdAt|date('d/m/Y H:i') }}</li>
+        <li class="list-group-item"><strong>Utilisateur :</strong> {{ entity.user.fullName }}</li>
+        <li class="list-group-item"><strong>Transporteur :</strong> {{ entity.carrierName }}</li>
+        <li class="list-group-item"><strong>Total TVA :</strong> {{ entity.totalTva }} €</li>
+        <li class="list-group-item"><strong>Total TTC :</strong> {{ entity.totalWt }} €</li>
+        <li class="list-group-item"><strong>État :</strong> {{ entity.state }}</li>
+    </ul>
+
+    <a href="{{ ea_url() }}" class="btn btn-secondary mt-3">← Retour à la liste</a>
+{% endblock %}
