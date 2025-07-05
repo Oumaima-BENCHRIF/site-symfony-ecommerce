@@ -7,7 +7,6 @@
 {% if error is not null and error.messageKey is defined %}
     <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
-    {# appel a une route  path('app_login') #}
     <form action="{{ path('app_login') }}" method="post">
 
         <label for="username">Votre Email:</label>
@@ -17,7 +16,6 @@
         <label for="password">Votre mot de passe:</label>
         <input class='form-control' type="password" id="password" name="_password" required>
 
-        {# If you want to control the URL the user is redirected to on success#}
         <input type="hidden" name="_target_path" value="{{ path('app_account') }}"> 
 
         <button type="submit" class='btn btn-success m-3'>Me connecter</button>

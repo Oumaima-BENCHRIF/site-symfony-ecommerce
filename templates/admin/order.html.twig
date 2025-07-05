@@ -3,8 +3,13 @@
 {% block content %}
     <h1>Détail de la commande #{{ entity.id }}</h1>
 
+    <h3>Commande n {{order.id}}</h3>
+    {{include('admin/state.html.twig',{field:{'value':order.state}})}}
+<br>
+<br>
+<span> Passee le {{order.createdAt|date('d/m/y')}}</span>
     <ul class="list-group mt-4">
-        <li class="list-group-item"><strong>Date :</strong> {{ entity.createdAt|date('d/m/Y H:i') }}</li>
+        <li class="list-group-item"><strong>Datev :</strong> {{ entity.createdAt|date('d/m/Y H:i') }}</li>
         <li class="list-group-item"><strong>Utilisateur :</strong> {{ entity.user.fullName }}</li>
         <li class="list-group-item"><strong>Transporteur :</strong> {{ entity.carrierName }}</li>
         <li class="list-group-item"><strong>Total TVA :</strong> {{ entity.totalTva }} €</li>
