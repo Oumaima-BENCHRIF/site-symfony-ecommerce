@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Classe\Cart;
 use App\Repository\OrderRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Stripe\Stripe;
@@ -76,9 +77,10 @@ class PaymentController extends AbstractController
           
     }
     #[Route('/commande/merci/{stripe_session_id}', name: 'app_payment_success')]
-    public function success($stripe_session_id,OrderRepository $orderRepository,EntityManagerInterface $entityManager): Response
+    public function success($stripe_session_id,OrderRepository $orderRepository,EntityManagerInterface $entityManager,Cart $cart): Response
     {
-        $order=$orderRepository->findoneby([
+        $order=$orderRepository->findOneBy([
+            'stripe_session_id'=>$stripe_session_id,
             'user'=>$this->getUser()
         ]);
 
@@ -86,8 +88,9 @@ class PaymentController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
 
-        if($order->getState()==1){
+        if($order->getState() == 1){
             $order->setState(2);
+            $cart->remove();
             $entityManager->flush();
         }
 

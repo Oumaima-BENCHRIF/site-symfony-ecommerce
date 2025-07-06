@@ -8,6 +8,7 @@ use App\Entity\User;
 use App\Form\AdressUserType;
 use App\Form\PasswordUserType;
 use App\Repository\AdressRepository;
+use App\Repository\OrderRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpParser\Builder\Function_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,9 +23,16 @@ class HomeController extends AbstractController
    
     
     #[Route('/compte', name: 'app_account')]
-    public function index(): Response
+    public function index(OrderRepository $orderRepository): Response
     {
-        return $this->render('account/index.html.twig');
+        $orders=$orderRepository->findBy([
+            'user'=>$this->getUser(),
+            'state'=>[2,3]
+        ]);
+
+        return $this->render('account/index.html.twig',[
+            'orders'=>$orders
+        ]);
     }
     
    
